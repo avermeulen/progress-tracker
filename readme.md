@@ -11,7 +11,7 @@ Functionality to add:
 
 ## Run it
 
-To run the app, clone the repo locally.
+To run the app, fork & then clone the repo locally.
 
 Then:
 

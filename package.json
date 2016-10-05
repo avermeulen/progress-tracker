@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express-handlebars": "^3.0.0",
     "octonode": "^0.7.6"
   }
 }

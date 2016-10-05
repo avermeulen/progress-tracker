@@ -2,8 +2,10 @@ var express = require('express'),
     express_handlebars = require('express-handlebars'),
     github = require('octonode');
 
-const app = express();
-const client = github.client();
+const app = express(),
+      client = github.client();
+
+
 
 
 app.engine('handlebars', express_handlebars({defaultLayout: 'main'}));
@@ -12,19 +14,30 @@ app.use(express.static(__dirname + '/public'));
 
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
-var specificUserFilePool = function(username, repoName, cb){
-    client
-        .get('/repos/' + username + '/' + repoName + '/contents', function(err, results, data){
+var specificUserFilePool = function(ghUserId, repository_name, cb){
 
-            var fileNames = data.map(function(entry){
-                return entry.name;
-            });
+    client
+        .get('/repos/' + ghUserId + '/' + repository_name + '/contents', function(err, results, data){
+
+        var holdFileNames = data.map(function(entry){
+              // console.log(ghUserId + ', ' + entry.name);
+              return entry.name;
+        })
+        // gather user specifics but without the get user module(Plugin)
+        var userContentObj = {
+             ghUserId :  ghUserId,
+             repository_name : repository_name,
+             holdFileNames : holdFileNames
+        };
+
+            console.log(userContentObj);
+            return userContentObj;
+
             //make sure it's a true async call
             process.nextTick(function(){
-                cb(err, fileNames);
+                cb(err, userContentObj);
             })
-
-            //console.log(fileNames.length);
+            // console.log(fileNames.length);
         });
 };
 
@@ -45,26 +58,23 @@ dynamically_typed.js
 type_errors.js
 empty_variables.js
 */
-var repofiles = []
-var userData = {};
+var trackedUser = 'MsEmma';
+app.get('/', function(req, res){
 
-specificUserFilePool('MsEmma', '53functions', function(err, files){
-    console.log( 'MsEmma : ' + repofiles.push(files));
-    console.log(repofiles);
+  specificUserFilePool(trackedUser, '53functions', function(err, files){
+      console.log(trackedUser + ', ' + files);
 
-
-  for (var i = 0; i < files.length; ++i)
-    userData[i] = files[i];
-    console.log(userData);
-    return userData;
+      res.render('usersFileDetails',{
+        filesNameResult : files
+    })
+  });
 });
-
 specificUserFilePool('avermeulen', '53functions', function(err, files){
-    console.log( 'avermeulen : ' + files.length);
+    // console.log( 'avermeulen : ' + files.length);
 });
 
 specificUserFilePool('Oyamasiphula', '53functions', function(err, files){
-    console.log('Oyamasiphula : ' + files.length);
+    // console.log('Oyamasiphula : ' + files.length);
 });
 
 

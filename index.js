@@ -9,6 +9,7 @@ const app = express(),
 
 
 app.engine('handlebars', express_handlebars({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars')
 
 app.use(express.static(__dirname + '/public'));
 
@@ -25,14 +26,14 @@ var specificUserFilePool = function(ghUserId, repository_name, cb){
         })
         // console.log(holdFileNames.length);
         // gather user specifics but without the get user module(Plugin)
-        var userContentObj = {
+        var detailedUserContentObj = {
              ghUserId :  ghUserId,
              repository_name : repository_name,
              holdFileNames : holdFileNames
         };
             //make sure it's a true async call
             process.nextTick(function(){
-                cb(err, userContentObj);
+                cb(err, detailedUserContentObj);
             })
           });
 
@@ -59,22 +60,22 @@ empty_variables.js
 var trackedUser = 'MsEmma';
 app.get('/', function(req, res){
 
-  specificUserFilePool('MsEmma', '53functions', function(err, userContent){
-    console.log(userContent);
+  specificUserFilePool('MsEmma', '53functions', function(err, detailedUserContent){
+    console.log(detailedUserContent);
 
       res.render('usersFileDetails',{
-        filesNameResult : userContent
+        filesNameResult : detailedUserContent
     })
   });
 });
-specificUserFilePool('avermeulen', '53functions', function(err, userContent){
+specificUserFilePool('avermeulen', '53functions', function(err, detailedUserContent){
 
     // console.log( 'avermeulen : ' + files.length);
-    console.log(userContent);
+    console.log(detailedUserContent);
 
 });
 
-specificUserFilePool('Oyamasiphula', '53functions', function(err, userContent){
+specificUserFilePool('Oyamasiphula', '53functions', function(err, detailedUserContent){
     // console.log('Oyamasiphula : ' + files.length);
 });
 

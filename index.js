@@ -20,26 +20,24 @@ var specificUserFilePool = function(ghUserId, repository_name, cb){
         .get('/repos/' + ghUserId + '/' + repository_name + '/contents', function(err, results, data){
 
         var holdFileNames = data.map(function(entry){
-              // console.log(ghUserId + ', ' + entry.name);
-              return entry.name;
+            var holdAllFiles = entry.name;
+              return holdAllFiles;
         })
+        // console.log(holdFileNames.length);
         // gather user specifics but without the get user module(Plugin)
         var userContentObj = {
              ghUserId :  ghUserId,
              repository_name : repository_name,
              holdFileNames : holdFileNames
         };
-
-            console.log(userContentObj);
-            return userContentObj;
-
             //make sure it's a true async call
             process.nextTick(function(){
                 cb(err, userContentObj);
             })
-            // console.log(fileNames.length);
-        });
+          });
+
 };
+
 
 // list of bootcamp users github accounts
 //SinethembaDlova
@@ -61,19 +59,22 @@ empty_variables.js
 var trackedUser = 'MsEmma';
 app.get('/', function(req, res){
 
-  specificUserFilePool(trackedUser, '53functions', function(err, files){
-      console.log(trackedUser + ', ' + files);
+  specificUserFilePool('MsEmma', '53functions', function(err, userContent){
+    console.log(userContent);
 
       res.render('usersFileDetails',{
-        filesNameResult : files
+        filesNameResult : userContent
     })
   });
 });
-specificUserFilePool('avermeulen', '53functions', function(err, files){
+specificUserFilePool('avermeulen', '53functions', function(err, userContent){
+
     // console.log( 'avermeulen : ' + files.length);
+    console.log(userContent);
+
 });
 
-specificUserFilePool('Oyamasiphula', '53functions', function(err, files){
+specificUserFilePool('Oyamasiphula', '53functions', function(err, userContent){
     // console.log('Oyamasiphula : ' + files.length);
 });
 
@@ -86,7 +87,7 @@ app.get('about',function(req,res){
 
 })
 // <portSetup>port delcaration
-var port = process.env.port || 2000
+var port = process.env.port || 2001
 // </portSetup>
 
 // <serveCodeBlocksRun>Lets configure our localhost server's port

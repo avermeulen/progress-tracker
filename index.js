@@ -1,9 +1,19 @@
 var express = require('express'),
     express_handlebars = require('express-handlebars'),
-    github = require('octonode');
+    github = require('octonode'),
+    // Load the full build.
+     _ = require('lodash'),
+     // Load the core build.
+     _ = require('lodash/core'),
+    // Load the FP build for immutable auto-curried iteratee-first data-last methods.
+    fp = require('lodash/fp'),
+    // Load method categories.
+    array = require('lodash/array'),
+    object = require('lodash/fp/object');
 
 const app = express(),
       client = github.client();
+
 
 
 
@@ -25,11 +35,12 @@ var specificUserFilePool = function(ghUserId, repository_name, cb){
               return holdAllFiles;
         })
         // console.log(holdFileNames.length);
+        var file_No = holdFileNames.length
         // gather user specifics but without the get user module(Plugin)
         var detailedUserContentObj = {
              ghUserId :  ghUserId,
              repository_name : repository_name,
-             holdFileNames : holdFileNames
+             holdFileNames : file_No
         };
             //make sure it's a true async call
             process.nextTick(function(){
@@ -63,7 +74,7 @@ app.get('/', function(req, res){
   specificUserFilePool('MsEmma', '53functions', function(err, detailedUserContent){
     console.log(detailedUserContent);
 
-      res.render('usersFileDetails',{
+      res.render('usersDataPresentation',{
         filesNameResult : detailedUserContent
     })
   });

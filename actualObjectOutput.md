@@ -1,0 +1,15 @@
+{ ghUserId: 'avermeulen',
+  repository_name: '53functions',
+  holdFileNames:
+   [ '.gitignore',
+     '.travis.yml',
+     'README.md',
+     'hello.js',
+     'hello_joe.js',
+     'hello_uppercase.js',
+     'ideas.md',
+     'length.js',
+     'number_list.js',
+     'package.json',
+     'sum_numbers.js',
+     'test' ] }

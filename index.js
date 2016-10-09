@@ -1,6 +1,6 @@
 var express = require('express'),
     express_handlebars = require('express-handlebars'),
-    github = require('octonode'),
+    userContentUtil = require('./routes/trackUsers'),
     // Load the full build.
     _ = require('lodash'),
     // Load the core build.
@@ -11,9 +11,7 @@ var express = require('express'),
     array = require('lodash/array'),
     object = require('lodash/fp/object');
 
-const app = express(),
-    client = github.client();
-
+const app = express();
 
 app.engine('handlebars', express_handlebars({
     defaultLayout: 'main'
@@ -21,32 +19,8 @@ app.engine('handlebars', express_handlebars({
 app.set('view engine', 'handlebars')
 
 app.use(express.static(__dirname + '/public'));
-app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use('/node_modules',  express.static(__dirname + '/node_modules'));
 
-
-var specificUserFilePool = function(ghUserId, repository_name, cb) {
-    client
-        .get('/repos/' + ghUserId + '/' + repository_name + '/contents', function(err, results, data) {
-
-            var holdFileNames = data.map(function(entry) {
-                var holdAllFiles = entry.name;
-                return holdAllFiles;
-            });
-            var numberOfFiles = holdFileNames.length;
-            // gather user specifics but without the get user module(Plugin)
-            var detailedUserContentObj = {
-                ghUserId: ghUserId,
-                repository_name: repository_name,
-                file_List: holdFileNames,
-                fileNo: numberOfFiles
-            };
-            //make sure it's a true async call
-            process.nextTick(function() {
-                cb(err, detailedUserContentObj);
-            });
-        })
-
-};
 // list of bootcamp users github accounts
 //SinethembaDlova
 
@@ -65,17 +39,7 @@ type_errors.js
 empty_variables.js
 */
 
-app.get('/repos/:ghUserId/:repository_name/contents', function(req, res) {
-    var ghUserId = req.params.ghUserId;
-    var repository_name = req.params.repository_name;
-    specificUserFilePool(ghUserId, repository_name, function(err, detailedUserContent) {
-        console.log(detailedUserContent);
-        res.render('usersDataPresentation', {
-            filesNameResult: detailedUserContent
-        })
-    });
-});
-
+app.get('/repos/:ghUserId/:repository_name/contents', userContentUtil.getUserRepoContent);
 
 // <portSetup>port delcaration
 var port = process.env.port || 2001

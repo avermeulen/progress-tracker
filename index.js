@@ -39,7 +39,10 @@ type_errors.js
 empty_variables.js
 */
 
-app.get('/repos/:ghUserId/:repository_name/contents', userContentUtil.getUserRepoContent);
+
+app.get('/track/:user_name/:repository_name/contents', userContentUtil.getUserRepoContent);
+
+// app.get('/track/:username/repo/:repository_name/matches', userContentUtil.userFileRepoCheck);
 
 // <portSetup>port delcaration
 var port = process.env.port || 2001

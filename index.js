@@ -1,8 +1,6 @@
 var express = require('express'),
     express_handlebars = require('express-handlebars'),
     userContentUtil = require('./routes/trackUsers'),
-    // Load the full build.
-    _ = require('lodash'),
     // Load the core build.
     _ = require('lodash/core'),
     // Load the FP build for immutable auto-curried iteratee-first data-last methods.
@@ -41,8 +39,7 @@ empty_variables.js
 
 
 app.get('/track/:user_name/:repository_name/contents', userContentUtil.getUserRepoContent);
-
-// app.get('/track/:username/repo/:repository_name/matches', userContentUtil.userFileRepoCheck);
+app.get('/track/:user_name/repo/:repository_name/matches', userContentUtil.userFileRepoCheck);
 
 // <portSetup>port delcaration
 var port = process.env.port || 2001
@@ -50,6 +47,6 @@ var port = process.env.port || 2001
 
 // <serveCodeBlocksRun>Lets configure our localhost server's port
 app.listen(port, function() {
-    console.log('app is listening on' + port);
+    console.log('app is listening on ' + port);
 });
 // </serveCodeBlocksRun>

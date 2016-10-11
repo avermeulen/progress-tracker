@@ -62,16 +62,36 @@ exports.userFileRepoCheck = function(req, res) {
     specificUserFilePool(user_name, repository_name, function(err, detailedUserContent) {
         var files = detailedUserContent.file_List;
         var fileList = [];
-
         var getUserFileNames = files.map(function(file) {
             fileList.push(userFileNames = {
                 file_name: file
             })
             return fileList;
         });
-        var checkIfFile1Exist = _.some(getUserFileNames, { file_name: 'package.json' });
+        console.log(getUserFileNames);
+        var isValidOrExisting  = [];
 
-        console.log(checkIfFile1Exist);
+        // var checkIfFile1Exists = _.some(getUserFileNames, { file_name: 'var_const.js' }),
+            var checkIfFile2Exists = _.some(getUserFileNames, {file_name: '.gitignore'});
+            // checkIfFile3Exists = _.some(getUserFileNames, { file_name: 'dynamically_typed.js' }),
+            // checkIfFile6Exists = _.some(getUserFileNames, { file_name: 'readme.md' }),
+            // checkIfFile4Exists = _.some(getUserFileNames, { file_name: 'type_errors.js' });
+            // checkIfFile5Exists = _.some(getUserFileNames, { file_name: 'empty_iables.js' });
+            // example of an existing file jsut to get a different Boolean
+
+      // isValidOrExisting.push(checkIfFile1Exists,checkIfFile2Exists,checkIfFile3Exists,checkIfFile4Exists,checkIfFile6Exists);
+      isValidOrExisting.push(checkIfFile2Exists);
+      console.log(isValidOrExisting);
+      console.log(isValidOrExisting.length);
+        //  fileValidation = {
+        //             isValidOrExisting : checkIfFile1Exists
+        //
+        // };
+
+
+        console.log(checkIfFile2Exists) ;
+        // console.log(checkIfFile1Exists, checkIfFile2Exists, checkIfFile3Exists, checkIfFile4Exists, checkIfFile6Exists) ;
+
         return getUserFileNames;
     });
 };

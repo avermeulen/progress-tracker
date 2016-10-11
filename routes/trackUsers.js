@@ -1,4 +1,7 @@
 const github = require('octonode'),
+      // Load the full build.
+    _ = require('lodash'),
+    // Load git user content
     client = github.client();
 
 var specificUserFilePool = function(user_name, repository_name, cb) {
@@ -44,7 +47,6 @@ exports.getUserRepoContent = function(req, res) {
     var repository_name = req.params.repository_name;
 
     specificUserFilePool(user_name, repository_name, function(err, detailedUserContent) {
-        console.log(detailedUserContent.file_List);
         var files = detailedUserContent.file_List
 
         res.render('usersDataPresentation', {
@@ -61,12 +63,15 @@ exports.userFileRepoCheck = function(req, res) {
         var files = detailedUserContent.file_List;
         var fileList = [];
 
-        files.map(function(file) {
-            fileList.push(currentExistingFileNames = {
+        var getUserFileNames = files.map(function(file) {
+            fileList.push(userFileNames = {
                 file_name: file
             })
-            console.log(currentExistingFileNames);
-            return currentExistingFileNames.file_name;
-        })
+            return fileList;
+        });
+        var checkIfFile1Exist = _.some(getUserFileNames, { file_name: 'package.json' });
+
+        console.log(checkIfFile1Exist);
+        return getUserFileNames;
     });
 };

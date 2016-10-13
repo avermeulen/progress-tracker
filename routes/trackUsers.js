@@ -1,5 +1,5 @@
 const github = require('octonode'),
-      // Load the full build.
+    // Load the full build.
     _ = require('lodash'),
     // Load git user content
     client = github.client();
@@ -41,7 +41,6 @@ var specificUserFilePool = function(user_name, repository_name, cb) {
             });
         })
 };
-
 exports.getUserRepoContent = function(req, res) {
     var user_name = req.params.user_name;
     var repository_name = req.params.repository_name;
@@ -55,43 +54,49 @@ exports.getUserRepoContent = function(req, res) {
     });
 };
 
+
+var functionIntro = {
+    projectName: "",
+    repoName: "function_intro",
+    expectedFiles: [
+        "greet.js",
+        "variables.js",
+        "dynamically_typed.js",
+        "type_errors.js",
+        "empty_variables.js"
+    ]
+}
+
+var repos = {
+    "function_intro": functionIntro,
+};
+
 exports.userFileRepoCheck = function(req, res) {
     var user_name = req.params.user_name;
     var repository_name = req.params.repository_name;
 
     specificUserFilePool(user_name, repository_name, function(err, detailedUserContent) {
         var files = detailedUserContent.file_List;
-        var fileList = [];
-        var getUserFileNames = files.map(function(file) {
-            fileList.push(userFileNames = {
-                file_name: file
-            })
-            return fileList;
+        console.log(files);
+
+        var project = repos[repository_name];
+        console.log(project);
+        var fileList = project.expectedFiles.map(function(expectedFile) {
+            return {
+                file_name: expectedFile,
+                exist: _.includes(files, expectedFile)
+            };
         });
-        console.log(getUserFileNames);
-        var isValidOrExisting  = [];
-
-        // var checkIfFile1Exists = _.some(getUserFileNames, { file_name: 'var_const.js' }),
-            var checkIfFile2Exists = _.some(getUserFileNames, {file_name: '.gitignore'});
-            // checkIfFile3Exists = _.some(getUserFileNames, { file_name: 'dynamically_typed.js' }),
-            // checkIfFile6Exists = _.some(getUserFileNames, { file_name: 'readme.md' }),
-            // checkIfFile4Exists = _.some(getUserFileNames, { file_name: 'type_errors.js' });
-            // checkIfFile5Exists = _.some(getUserFileNames, { file_name: 'empty_iables.js' });
-            // example of an existing file jsut to get a different Boolean
-
-      // isValidOrExisting.push(checkIfFile1Exists,checkIfFile2Exists,checkIfFile3Exists,checkIfFile4Exists,checkIfFile6Exists);
-      isValidOrExisting.push(checkIfFile2Exists);
-      console.log(isValidOrExisting);
-      console.log(isValidOrExisting.length);
-        //  fileValidation = {
-        //             isValidOrExisting : checkIfFile1Exists
-        //
-        // };
 
 
-        console.log(checkIfFile2Exists) ;
-        // console.log(checkIfFile1Exists, checkIfFile2Exists, checkIfFile3Exists, checkIfFile4Exists, checkIfFile6Exists) ;
-
-        return getUserFileNames;
+        var details = {
+            username: user_name,
+            repo: repository_name,
+            files: fileList
+        };
+        console.log(details);
+        res.render('checkedFilesFeeds', {
+            userFeed : details
+        });
     });
 };

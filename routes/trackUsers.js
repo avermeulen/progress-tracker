@@ -77,10 +77,7 @@ exports.userFileRepoCheck = function(req, res) {
 
     specificUserFilePool(user_name, repository_name, function(err, detailedUserContent) {
         var files = detailedUserContent.file_List;
-        console.log(files);
-
         var project = repos[repository_name];
-        console.log(project);
         var fileList = project.expectedFiles.map(function(expectedFile) {
             return {
                 file_name: expectedFile,
@@ -94,7 +91,7 @@ exports.userFileRepoCheck = function(req, res) {
             repo: repository_name,
             files: fileList
         };
-        console.log(details);
+        // console.log(details);
         res.render('checkedFilesFeeds', {
             userFeed : details
         });

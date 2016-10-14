@@ -2,7 +2,26 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:100);
 *, *::before, *::after {
     box-sizing: border-box;
-    margin-bottom: -7px;
+    /*margin-bottom: -7px;*/
+}
+.ui.table tr:first-child td {
+    border-top: 0.5px solid rgb(227, 228, 230);
+    /*padding: 0;*/
+    text-align: center;
+    /*margin: 2px;*/
+}
+  .ui.segment {
+    position: relative;
+    background: #FFF;
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    margin: 0rem 0;
+    padding: 1em;
+    border-radius: .28571429rem;
+    border: 1px solid rgba(34,36,38,.15);
+}
+div table i.icon, i.icons .collapsed {
+    font-size: 1em;
+    color: red;
 }
 
 html, body {
@@ -10,6 +29,7 @@ html, body {
     height: 100%;
     /* font-family: Raleway, sans-serif; */
     font-size: medium;
+    line-height: inherit;
 }
 
 .container {

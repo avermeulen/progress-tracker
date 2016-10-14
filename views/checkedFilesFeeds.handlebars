@@ -2,33 +2,37 @@
   <div class="ui segments">
     <div class="ui segment">
       {{#userFeed}}
-      <p>Username:  {{username}}</p>
+      <p><i class="github icon"></i> Username:  {{username}}</p>
     </div>
     <div class="ui secondary segment">
-      <p>Repository : {{repo}}</p>
+      <p><i class="github icon"></i> Repository : {{repo}}</p>
     </div>
   </div>
   <div class="ui internally celled grid">
     <div class="row">
       <div class="ten wide column">
-        <h2>Files</h2>
+          <h2>File Check </h2>
 
-        <table class="ui compact celled definition table">
+        <table class="ui compact definition table">
             <thead>
                 <tr>
-                    <th>Files</th>
+                    <th><i class="github square icon"></i>Required Files</th>
                     <th>Exists ?</th>
                 </tr>
             </thead>
             {{#each files}}
             <tbody>
                     <tr>
-
                         <td class="collapsing">
                             {{file_name}}
                         </td>
-                        <td class="collapsing">
-                            {{exist}}
+                        <td class="collapsing" id="ico">
+                              <!-- <p hidden="hidden">{{exist}}</p> -->
+                              {{#if exist}}
+                              <i class="large green checkmark icon"></i>
+                            {{else}}
+                            <i class="icon close"></i>
+                            {{/if}}
                         </td>
                     </tr>
             </tbody>

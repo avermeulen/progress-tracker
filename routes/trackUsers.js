@@ -65,7 +65,7 @@ var functionIntro = {
         "type_errors.js",
         "empty_variables.js"
     ]
-}
+};
 
 var repos = {
     "function_intro": functionIntro,

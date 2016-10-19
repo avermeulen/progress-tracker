@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="ui segments">
+    <div class="ui segment">
+  {{#userFeed}}
+      <p><i class="github icon"></i> Username:  {{username}}</p>
+    </div>
+    <div class="ui secondary segment">
+      <p><i class="github icon"></i> Repository : {{repo}}</p>
+    </div>
+  </div>
+</div>
+
+  <div class="row">
+  <div class="ui internally celled grid">
+    <div class="row">
+      <div class="ten wide column">
+          <!-- <h2>File Check </h2> -->
+
+        <table class="ui compact definition table">
+            <thead>
+                <tr>
+                    <th><i class="github square icon"></i>Required Files</th>
+                    <th>Exists ?</th>
+                </tr>
+            </thead>
+          {{#each files}}
+            <tbody>
+                    <tr>
+                        <td class="collapsing">
+                            {{file_name}}
+                        </td>
+                        <td class="collapsing" id="ico">
+                              <!-- <p hidden="hidden">{{exist}}</p> -->
+                              {{#if exist}}
+                            <i class="large green checkmark icon"></i>
+                                {{else}}
+                            <i class="icon close"></i>
+                            {{/if}}
+                        </td>
+                    </tr>
+            </tbody>
+          {{/each}}
+  {{/userFeed}}
+            <!-- <tfoot class="full-width">
+                <tr>
+                    <th></th>
+                    <th colspan="4">
+                        <div class="ui right floated small primary labeled icon button">
+                            <i class="user icon"></i> Add User
+                        </div>
+                        <div class="ui small button">
+                            Approve
+                        </div>
+                        <div class="ui small  disabled button">
+                            Approve All
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="4">
+                        <div class="ui teal progress" id="example3">
+                            <div class="bar">
+                                <div class="progress"></div>
+                            </div>
+                            <div class="label">Adding Photos</div>
+                        </div>
+                    </th>
+                </tr>
+            </tfoot> -->
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<br>

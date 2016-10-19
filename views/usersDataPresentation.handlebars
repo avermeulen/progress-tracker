@@ -1,0 +1,66 @@
+<div class="ui internally celled grid">
+  <div class="row">
+    <div class="three wide column">
+      <img>
+    </div>
+    <div class="ten wide column">
+      <h2>Files</h2>
+
+      <table class="ui compact celled definition table">
+          <thead>
+              <tr>
+                  <th></th>
+                  <th>BootCamper Name</th>
+                  <th>Repository</th>
+                  <th>number of Files</th>
+              </tr>
+          </thead>
+          <tbody>
+              {{#filesNameResult}}
+                  <tr>
+                      <td class="collapsing">
+                          <div class="ui fitted slider checkbox">
+                              <input type="checkbox"> <label></label>
+                          </div>
+                      </td>
+                      <td class="collapsing">
+                          {{user_name}}
+                      </td>
+                      <td class="collapsing">
+                          {{repository_name}}
+                      </td>
+                      <td class="collapsing">
+                          {{fileNo}}
+                      </td>
+                  </tr>
+          </tbody>
+          {{/filesNameResult}}
+          <!-- <tfoot class="full-width">
+              <tr>
+                  <th></th>
+                  <th colspan="4">
+                      <div class="ui right floated small primary labeled icon button">
+                          <i class="user icon"></i> Add User
+                      </div>
+                      <div class="ui small button">
+                          Approve
+                      </div>
+                      <div class="ui small  disabled button">
+                          Approve All
+                      </div>
+                  </th>
+              </tr>
+              <tr>
+                  <th colspan="4">
+                      <div class="ui teal progress" id="example3">
+                          <div class="bar">
+                              <div class="progress"></div>
+                          </div>
+                          <div class="label">Adding Photos</div>
+                      </div>
+                  </th>
+              </tr>
+          </tfoot> -->
+      </table>
+
+    </div>

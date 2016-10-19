@@ -1,0 +1,192 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700);
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: url("/img/Aluminum-Wallpaper-for-Desktop.jpg");
+  background-size: cover;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+.menu-opener, .menu-opener:hover, .menu-opener.active, .menu-opener-inner, .menu-opener-inner::before, .menu-opener-inner::after, .menu, .menu.active {
+  -webkit-transition: 250ms all;
+  transition: 250ms all;
+}
+menu-link {
+  border: solid #ffbfbf 1px;
+}
+menu-inner {
+  border: solid grey;
+}
+.row {
+    height: 100px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.menu-opener {
+  background: #8bc53f;
+  cursor: pointer;
+  height: 4rem;
+  margin: 1rem;
+  position: absolute;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  width: 4rem;
+}
+
+.menu-opener:hover, .menu-opener.active {
+  background: #21ba45;
+}
+
+.menu-opener-inner {
+  background: white;
+  height: .5rem;
+  margin-left: .75rem;
+  margin-top: 1.75rem;
+  width: 2.5rem;
+}
+.menu-opener-inner::before, .menu-opener-inner::after {
+  background: white;
+  content: '';
+  display: block;
+  height: .5rem;
+  width: 2.5rem;
+}
+.menu-opener-inner::before {
+  -webkit-transform: translateY(-0.75rem);
+          transform: translateY(-0.75rem);
+}
+.menu-opener-inner::after {
+  -webkit-transform: translateY(0.25rem);
+          transform: translateY(0.25rem);
+}
+.menu-opener-inner.active {
+  background: transparent;
+}
+.menu-opener-inner.active::before {
+  -webkit-transform: translateY(0rem) rotate(-45deg);
+          transform: translateY(0rem) rotate(-45deg);
+}
+.menu-opener-inner.active::after {
+  -webkit-transform: translateY(-0.5rem) translateX(0rem) rotate(45deg);
+          transform: translateY(-0.5rem) translateX(0rem) rotate(45deg);
+}
+
+.menu {
+  background: #8bc53f;
+  color: transparent;
+  height: 4rem;
+  margin: 1rem;
+  position: absolute;
+  top: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  width: 0rem;
+  z-index: -1;
+}
+.menu.active {
+  width: calc(100% - 2rem);
+}
+.menu.active .menu-link {
+  color: white;
+}
+
+.menu-inner {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 100%;
+  list-style-type: none;
+  margin: 0;
+  margin-left: 4rem;
+  padding: 0;
+}
+
+.menu-link {
+  color: transparent;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  font-size: 2rem;
+  font-weight: 100;
+  height: 100%;
+  text-align: center;
+  text-decoration: none;
+}
+.menu-link li {
+  margin: auto;
+}
+.ui.celled.grid>.column:not(.row), .ui.celled.grid>.row>.column {
+    box-shadow: -1px 0 0 0 #D4D4D5;
+    padding: 0em;
+}
+table tr:first-child td {
+    border-top: 0.5px solid rgb(227, 228, 230);
+    /*padding: 0;*/
+    text-align: center;
+    /*margin: 2px;*/
+}
+
+div table i.icon, i.icons .collapsed {
+    font-size: 1em;
+    color: red;
+}
+.ui.table {
+    width: 100%;
+    background: #FFF;
+    margin: 1em 129px;
+    border: 2px solid rgba(34,36,38,.15);
+    box-shadow: none;
+    border-radius: .28571429rem;
+    text-align: center;
+    color: rgba(0,0,0,.87);
+    border-collapse: separate;
+    border-spacing: 0;
+}
+.ui.segment {
+  position: relative;
+  background: #FFF;
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  margin: 0rem 0;
+  padding: 1em;
+  border-radius: .28571429rem;
+  border: 1px solid rgba(34,36,38,.15);
+}
+.ui.vertical.steps {
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    overflow: visible;
+    float: right;
+}
+
+.ui.table:last-child {
+    margin-bottom: 0;
+    display: table;
+    position: absolute;
+}

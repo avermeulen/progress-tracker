@@ -1,24 +1,23 @@
-var github = require('octonode');
+var express = require('express'),
+    express_handlebars = require('express-handlebars'),
+    userContentUtil = require('./routes/trackUsers'),
+    // Load the core build.
+    _ = require('lodash/core'),
+    // Load the FP build for immutable auto-curried iteratee-first data-last methods.
+    fp = require('lodash/fp'),
+    // Load method categories.
+    array = require('lodash/array'),
+    object = require('lodash/fp/object');
 
-const client = github.client();
+const app = express();
 
+app.engine('handlebars', express_handlebars({
+    defaultLayout: 'main'
+}));
+app.set('view engine', 'handlebars')
 
-var filesForUser = function(username, repoName, cb){
-    client
-        .get('/repos/' + username + '/' + repoName + '/contents', function(err, results, data){
-
-            var fileNames = data.map(function(entry){
-                return entry.name;
-            });
-
-            //make sure it's a true async call
-            process.nextTick(function(){
-                cb(err, fileNames);
-            })
-
-            //console.log(fileNames.length);
-        });
-};
+app.use(express.static(__dirname + '/public'));
+app.use('/node_modules',  express.static(__dirname + '/node_modules'));
 
 // list of bootcamp users github accounts
 //SinethembaDlova
@@ -38,14 +37,16 @@ type_errors.js
 empty_variables.js
 */
 
-filesForUser('MsEmma', '53functions', function(err, files){
-    console.log( 'MsEmma : ' + files.length);
-});
 
-filesForUser('avermeulen', '53functions', function(err, files){
-    console.log( 'avermeulen : ' + files.length);
-});
+app.get('/track/:user_name/:repository_name/contents', userContentUtil.getUserRepoContent);
+app.get('/track/:user_name/repo/:repository_name/matches', userContentUtil.userFileRepoCheck);
 
-filesForUser('Oyamasiphula', '53functions', function(err, files){
-    console.log('Oyamasiphula : ' + files.length);
+// <portSetup>port delcaration
+var port = process.env.port || 2001
+    // </portSetup>
+
+// <serveCodeBlocksRun>Lets configure our localhost server's port
+app.listen(port, function() {
+    console.log('app is listening on ' + port);
 });
+// </serveCodeBlocksRun>

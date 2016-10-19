@@ -190,3 +190,7 @@ div table i.icon, i.icons .collapsed {
     display: table;
     position: absolute;
 }
+.ui.segment:last-child {
+    margin-bottom: 0;
+    margin-left: 1em;
+}

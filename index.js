@@ -19,12 +19,6 @@ app.set('view engine', 'handlebars')
 app.use(express.static(__dirname + '/public'));
 app.use('/node_modules',  express.static(__dirname + '/node_modules'));
 
-// list of bootcamp users github accounts
-//SinethembaDlova
-
-// the project name
-//function_intro
-
 // list of all the files the need to create for each project
 
 // look at this: https://lodash.com/docs/4.16.2#find
@@ -37,7 +31,9 @@ type_errors.js
 empty_variables.js
 */
 
-
+app.get('/',function(req,res){
+  res.render('home');
+})
 app.get('/track/:user_name/:repository_name/contents', userContentUtil.getUserRepoContent);
 app.get('/track/:user_name/repo/:repository_name/matches', userContentUtil.userFileRepoCheck);
 

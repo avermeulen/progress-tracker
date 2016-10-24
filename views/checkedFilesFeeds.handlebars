@@ -1,76 +1,69 @@
-<div class="row">
-  <div class="ui segments">
-    <div class="ui segment">
-  {{#userFeed}}
-      <p><i class="github icon"></i> Username:  {{username}}</p>
-    </div>
-    <div class="ui secondary segment">
-      <p><i class="github icon"></i> Repository : {{repo}}</p>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    {{#userFeed}}
+    <h3 class="panel-title"><i class="icon-github"></i> Username: {{username}}</h3>
+  </div>
+  <div class="panel-body"><i class="icon-github"></i>
+   Repository : {{repo}}
   </div>
 </div>
-<div class="ui horizontal divider">
-  </div>
-  <div class="row">
-  <div class="ui grid">
-    <div class="row">
-      <div class="ten wide column">
-          <!-- <h2>File Check </h2> -->
+<div class="bs-example" data-example-id="simple-responsive-table">
 
-        <table class="ui compact definition table">
-            <thead>
-                <tr>
-                    <th><i class="github square icon"></i>Required Files</th>
-                    <th>Exists ?</th>
-                </tr>
-            </thead>
-          {{#each files}}
-            <tbody>
-                    <tr>
-                        <td class="collapsing">
-                            {{file_name}}
-                        </td>
-                        <td class="collapsing" id="ico">
-                              <!-- <p hidden="hidden">{{exist}}</p> -->
-                              {{#if exist}}
-                            <i class="large green checkmark icon"></i>
-                                {{else}}
-                            <i class="icon close"></i>
-                            {{/if}}
-                        </td>
-                    </tr>
-            </tbody>
-          {{/each}}
+  <table id="req-files-check" class="table table-bordered">
+    <colgroup> <col class="col-xs-4"> <col class="col-xs-4"> </colgroup>
+    <thead>
+        <tr class="bg-success">
+            <th><i class="icon-github"></i> Required Files</th>
+            <th >Exists ?</th>
+        </tr>
+    </thead>
+  {{#each files}}
+    <tbody>
+            <tr>
+                <td>
+                    {{file_name}}
+                </td>
+                <td>
+                      <!-- <p hidden="hidden">{{exist}}</p> -->
+                      {{#if exist}}
+                      <i><span class="glyphicon glyphicon-ok icon-2x" aria-hidden="true"></span>
+                        {{else}}
+                        <i class="icon-remove icon-2x" ></i>
+                    {{/if}}
+                </td>
+            </tr>
+    </tbody>
+  {{/each}}
   {{/userFeed}}
-            <!-- <tfoot class="full-width">
-                <tr>
-                    <th></th>
-                    <th colspan="4">
-                        <div class="ui right floated small primary labeled icon button">
-                            <i class="user icon"></i> Add User
-                        </div>
-                        <div class="ui small button">
-                            Approve
-                        </div>
-                        <div class="ui small  disabled button">
-                            Approve All
-                        </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th colspan="4">
-                        <div class="ui teal progress" id="example3">
-                            <div class="bar">
-                                <div class="progress"></div>
-                            </div>
-                            <div class="label">Adding Photos</div>
-                        </div>
-                    </th>
-                </tr>
-            </tfoot> -->
-        </table>
+  </table>
+</div>
+<div class="alert alert-success" role="alert"> <p>Status Bar</p>
+  <div class="class="col-xs-5"">
+    <div class="progress">
+      <div id="myBar" class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+        <span class="sr-only">40% Complete (success)</span>
       </div>
     </div>
+    <!-- Split button -->
+      <div class="btn-group">
+    </div>
+    <button type="button" class="btn btn-success">Check</button>
   </div>
 </div>
-<!-- <br> -->
+
+
+<script type="text/javascript">
+function move() {
+var elem = document.getElementById("myBar");
+var width = 1;
+var id = setInterval(frame, 10);
+function frame() {
+  if (width >= 100) {
+    clearInterval(id);
+  } else {
+    width++;
+    elem.style.width = width + '%';
+  }
+}
+}
+</script>

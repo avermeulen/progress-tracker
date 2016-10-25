@@ -5,21 +5,13 @@ const github = require('octonode'),
     client = github.client();
 
 var specificUserFilePool = function(user_name, repository_name, cb) {
-
     client
         .get('/repos/' + user_name + '/' + repository_name + '/contents', function(err, results, data) {
 
             // The app crashes when it reaches this part
-
-            if (data === "undefined") {
-              console.log('Fix me , and make it clear that you"ve fixed me on github')
-            } else {
-
-              function  findErrorSync(req , res){
-                    res.send('Fix me')
-              };
-              findErrorSync();
-            }
+            // if (data === "undefined") {
+            //   console.log('Fix me , and make it clear that you"ve fixed me on github')
+            //   }
 
             var fileNames = data.map(function(entry) {
                 var holdAllFiles = entry.name;

@@ -2,12 +2,7 @@ var express = require('express'),
     express_handlebars = require('express-handlebars'),
     userContentUtil = require('./routes/trackUsers'),
     // Load the core build.
-    _ = require('lodash/core'),
-    // Load the FP build for immutable auto-curried iteratee-first data-last methods.
-    fp = require('lodash/fp'),
-    // Load method categories.
-    array = require('lodash/array'),
-    object = require('lodash/fp/object');
+    _ = require('lodash/core');
 
 const app = express();
 

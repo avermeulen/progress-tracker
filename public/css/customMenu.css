@@ -1,14 +1,11 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700);
-
-*,
+/**,
 *::before,
 *::after {
   box-sizing: border-box;
-}
+}*/
 
 body {
-  background: url("/img/Aluminum-Wallpaper-for-Desktop.jpg");
-  background-size: cover;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
@@ -16,22 +13,12 @@ body {
   -webkit-transition: 250ms all;
   transition: 250ms all;
 }
-menu-link {
-  border: solid #ffbfbf 1px;
-}
-menu-inner {
-  border: solid grey;
-}
-.row {
-    height: 100px;
-    width: 100%;
-    margin-bottom: 10px;
-}
+
 .menu-opener {
-  background: #8bc53f;
+  background: #8bab2b;
   cursor: pointer;
   height: 4rem;
-  margin: 1rem;
+  margin: 2rem;
   position: absolute;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -40,8 +27,8 @@ menu-inner {
   width: 4rem;
 }
 
-.menu-opener:hover, .menu-opener.active {
-  background: #21ba45;
+opener.active {
+    background: #5ec54b;
 }
 
 .menu-opener-inner {
@@ -79,10 +66,10 @@ menu-inner {
 }
 
 .menu {
-  background: #8bc53f;
+  background: #37d425;
   color: transparent;
   height: 4rem;
-  margin: 1rem;
+  margin: 2rem;
   position: absolute;
   top: 0;
   -webkit-user-select: none;
@@ -94,6 +81,8 @@ menu-inner {
 }
 .menu.active {
   width: calc(100% - 2rem);
+  position: inherit;
+
 }
 .menu.active .menu-link {
   color: white;
@@ -114,6 +103,7 @@ menu-inner {
   margin: 0;
   margin-left: 4rem;
   padding: 0;
+
 }
 
 .menu-link {
@@ -135,58 +125,12 @@ menu-inner {
 .menu-link li {
   margin: auto;
 }
-.ui.celled.grid>.column:not(.row), .ui.celled.grid>.row>.column {
-    box-shadow: -1px 0 0 0 #D4D4D5;
-    padding: 0em;
+.icon-remove {
+  color: red;
 }
-table tr:first-child td {
-    border-top: 0.5px solid rgb(227, 228, 230);
-    /*padding: 0;*/
-    text-align: center;
-    /*margin: 2px;*/
+.glyphicon {
+  color: green;
 }
-
-div table i.icon, i.icons .collapsed {
-    font-size: 1em;
-    color: red;
-}
-.ui.table {
-    width: 100%;
-    background: #FFF;
-    margin: 1em 129px;
-    border: 2px solid rgba(34,36,38,.15);
-    box-shadow: none;
-    border-radius: .28571429rem;
-    text-align: center;
-    color: rgba(0,0,0,.87);
-    border-collapse: separate;
-    border-spacing: 0;
-}
-.ui.segment {
-  position: relative;
-  background: #FFF;
-  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
-  margin: 0rem 0;
-  padding: 1em;
-  border-radius: .28571429rem;
-  border: 1px solid rgba(34,36,38,.15);
-}
-.ui.vertical.steps {
-    display: -webkit-inline-box;
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    overflow: visible;
-    float: right;
-}
-
-.ui.table:last-child {
-    margin-bottom: 0;
-    display: table;
-    position: absolute;
+#req-files-check {
+  text-align: center;
 }

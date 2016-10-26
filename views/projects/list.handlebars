@@ -1,0 +1,19 @@
+<div class="row">
+    <h1>Projects</h1>
+
+    <a href="/projects/add" class="btn btn-success">Add project</a>
+
+    <table class="table">
+        {{#projects}}
+            <tr>
+                <td>
+                    {{projectName}}
+                </td>
+                <td>
+                    <a class="btn" href="/projects/edit/{{_id}}">Edit</a>
+                </td>
+            </tr>
+        {{/projects}}
+    </table>
+
+</div>

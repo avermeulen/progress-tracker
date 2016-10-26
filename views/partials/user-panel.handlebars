@@ -1,11 +1,8 @@
-
 <div class="list-group">
   <a href="#" class="list-group-item active" ><i class="icon-group"></i>
      USERNAMES
   </a>
-  <a class="list-group-item" href="http://localhost:2001/track/Christianraymond/repo/function_intro/matches"><i class="icon-user"></i> Christianraymond</a>
-  <a class="list-group-item" href="http://localhost:2001/track/Sibabale/repo/function_intro/matches"><i class="icon-user"></i> Sibabale</a>
-  <a class="list-group-item" href="http://localhost:2001/track/SinethembaDlova/repo/function_intro/matches"><i class="icon-user"></i> Sinethemba Dlova</a>
-  <a class="list-group-item" href="http://localhost:2001/track/GarethW1994/repo/function_intro/matches"><i class="icon-user"></i> Gareth Williams</a>
-  <a class="list-group-item" href="http://localhost:2001/track/janine-code/repo/function_intro/matches"><i class="icon-user"></i> Janine Ritchie</a>
+  {{#candidates}}
+    <a class="list-group-item" href="/track/{{this}}/repo/{{../project}}/matches"><i class="icon-user"></i> {{this}}</a>
+  {{/candidates}}
 </div>

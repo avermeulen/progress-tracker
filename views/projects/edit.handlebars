@@ -1,0 +1,33 @@
+<div class="row">
+    <h1>Edit project</h1>
+
+    <form class="" action="/projects/{{_id}}/add/files" method="post">
+        <div class="form-group">
+            <label for="projectName">Project name</label>
+            {{projectName}}
+        </div>
+
+        <div class="form-group">
+            <label for="fileName">File name</label>
+            <input type="text" class="form-control" name="fileNames" >
+        </div>
+        <input type="submit" class="btn btn-success" name="addFile">
+    </form>
+
+    <h2>Files</h2>
+    <table class="table">
+        {{#files}}
+        <tr>
+            <td>
+                {{name}}
+            </td>
+            <td>
+                <a class="btn btn-danger" href="/projects/{{../_id}}/files/{{_id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {{/files}}
+    </table>
+
+
+
+</div>

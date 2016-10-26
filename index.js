@@ -1,8 +1,10 @@
+'use strict';
+
 const express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     express_handlebars = require('express-handlebars'),
-    userContentUtil = require('./routes/trackUsers'),
+    TrackUsers = require('./routes/trackUsers'),
     Projects = require('./routes/projects'),
     models = require('./models'),
     // Load the core build.
@@ -55,10 +57,13 @@ app.use(function(req, res, next){
 app.get('/',function(req,res){
   res.render('home');
 })
-app.get('/track/:user_name/:repository_name/contents', userContentUtil.getUserRepoContent);
-app.get('/track/:user_name/repo/:repository_name/matches', userContentUtil.userFileRepoCheck);
 
-var projects = Projects(app, models);
+const trackUsers = TrackUsers(models);
+
+app.get('/track/:user_name/:repository_name/contents', trackUsers.specificUserFilePool);
+app.get('/track/:user_name/repo/:repository_name/matches', trackUsers.userFileRepoCheck);
+
+const projects = Projects(models);
 
 app.get('/projects', projects.list);
 app.get('/projects/add', projects.showAdd);

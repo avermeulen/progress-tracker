@@ -1,7 +1,7 @@
-module.exports = function(app, models){
+module.exports = function(models){
 
     var add = function(req, res, next){
-
+        
         const projectName = req.body.projectName;
         if (projectName){
             const project = models.Project({projectName});

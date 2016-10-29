@@ -1,7 +1,7 @@
 module.exports = function(models){
 
     var add = function(req, res, next){
-        
+
         const projectName = req.body.projectName;
         if (projectName){
             const project = models.Project({projectName});
@@ -41,7 +41,6 @@ module.exports = function(models){
     var addFiles = function(req, res){
         const project_id = req.params.project_id
         const fileNames = req.body.fileNames;
-        console.log(project_id);
 
         models.Project
             .findById(project_id)

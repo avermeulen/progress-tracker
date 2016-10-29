@@ -1,8 +1,29 @@
 <div class="list-group">
   <a href="#" class="list-group-item active" ><i class="icon-group"></i>
-     USERNAMES
+     Candidates
   </a>
   {{#candidates}}
-    <a class="list-group-item" href="/track/{{this}}/repo/{{../project}}/matches"><i class="icon-user"></i> {{this}}</a>
+    <a class="list-group-item candidate"
+        href="/track/{{username}}/repo/{{repo}}/matches">
+            <i class="icon-user"></i> {{fullName}}</a>
   {{/candidates}}
 </div>
+
+<script type="text/javascript">
+
+    var candidates = document.querySelectorAll('.candidate');
+
+    for (var i = 0; i < candidates.length; i++) {
+        var candidate = candidates[i];
+        candidate.addEventListener('click', function(e){
+            e.preventDefault();
+            jQuery.get(e.target.href, function(result){
+                //console.log(result);
+                document.querySelector('.candidate-file-details').innerHTML = result;
+            });
+
+
+        })
+    }
+
+</script>

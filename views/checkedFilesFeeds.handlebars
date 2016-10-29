@@ -1,69 +1,56 @@
 <div class="panel panel-default">
-  <div class="panel-heading">
-    {{#userFeed}}
-    <h3 class="panel-title"><i class="icon-github"></i> Username: {{username}}</h3>
-  </div>
-  <div class="panel-body"><i class="icon-github"></i>
-   Repository : {{repo}}
-  </div>
+    <div class="panel-heading">
+        {{#userFeed}}
+            <h3 class="panel-title"><i class="icon-github"></i> Username: {{username}}</h3>
+    </div>
+    <div class="panel-body"><i class="icon-github"></i> Repository : {{repo}}
+    </div>
 </div>
-<div class="bs-example" data-example-id="simple-responsive-table">
 
-  <table id="req-files-check" class="table table-bordered">
-    <colgroup> <col class="col-xs-4"> <col class="col-xs-4"> </colgroup>
-    <thead>
-        <tr class="bg-success">
-            <th><i class="icon-github"></i> Required Files</th>
-            <th >Exists ?</th>
-        </tr>
-    </thead>
-  {{#each files}}
-    <tbody>
-            <tr>
-                <td>
-                    {{file_name}}
-                </td>
-                <td>
-                      <!-- <p hidden="hidden">{{exist}}</p> -->
-                      {{#if exist}}
-                      <i><span class="glyphicon glyphicon-ok icon-2x" aria-hidden="true"></span>
-                        {{else}}
-                        <i class="icon-remove icon-2x" ></i>
-                    {{/if}}
-                </td>
+<div class="bs-example">
+
+    <table id="req-files-check" class="table table-bordered">
+        <colgroup>
+            <col class="col-xs-4">
+            <col class="col-xs-4"> </colgroup>
+        <thead>
+            <tr class="bg-success">
+                <th><i class="icon-github"></i> Required Files</th>
+                <th>Exists ?</th>
             </tr>
-    </tbody>
-  {{/each}}
-  {{/userFeed}}
-  </table>
+        </thead>
+        {{#each files}}
+            <tbody>
+                <tr>
+                    <td>
+                        {{file_name}}
+                    </td>
+                    <td>
+                        <!-- <p hidden="hidden">{{exist}}</p> -->
+                        {{#if exist}}
+                            <i><span class="glyphicon glyphicon-ok icon-2x" aria-hidden="true"></span>
+                                {{else}}
+                                <i class="icon-remove icon-2x" ></i>
+                        {{/if}}
+                    </td>
+                </tr>
+            </tbody>
+        {{/each}}
+        {{/userFeed}}
+    </table>
 </div>
-<div class="alert alert-success" role="alert"> <p>Status Bar</p>
-  <div class="class="col-xs-5"">
-    <div class="progress">
-      <div id="myBar" class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-        <span class="sr-only">40% Complete (success)</span>
-      </div>
+<div class="alert alert-success" role="alert">
+    <p>Status Bar</p>
+    <div class="class=" col-xs-5 "">
+        <div class="progress">
+            <div id="myBar" class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                <span class="sr-only">40% Complete (success)</span>
+            </div>
+        </div>
+        <!-- Split button -->
+        <div class="btn-group">
+        </div>
+        <button type="button" class="btn btn-success">Check</button>
     </div>
-    <!-- Split button -->
-      <div class="btn-group">
-    </div>
-    <button type="button" class="btn btn-success">Check</button>
-  </div>
 </div>
-
-
-<script type="text/javascript">
-function move() {
-var elem = document.getElementById("myBar");
-var width = 1;
-var id = setInterval(frame, 10);
-function frame() {
-  if (width >= 100) {
-    clearInterval(id);
-  } else {
-    width++;
-    elem.style.width = width + '%';
-  }
-}
-}
-</script>
+</div>

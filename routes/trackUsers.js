@@ -10,30 +10,24 @@ module.exports = function(models) {
         client
             .get('/repos/' + user_name + '/' + repository_name + '/contents', function(err, results, data) {
 
-                // The app crashes when it reaches this part
-                // if (data === "undefined") {
-                //   console.log('Fix me , and make it clear that you"ve fixed me on github')
-                //   }
+                const fileNames = data ? data.map((entry) =>
+                    entry.name) : [];
 
-                var fileNames = data.map(function(entry) {
-                    var holdAllFiles = entry.name;
-                    // holdAllFiles
-                    return holdAllFiles;
-                });
-                var numberOfFiles = fileNames.length;
                 // gather user specifics but without the get user module(Plugin)
-                var detailedUserContentObj = {
+                const detailedUserContentObj = {
                     user_name: user_name,
                     repository_name: repository_name,
                     file_List: fileNames,
-                    fileNo: numberOfFiles
+                    fileNo: fileNames.length
                 };
+
                 //make sure it's a true async call
                 process.nextTick(function() {
                     cb(err, detailedUserContentObj);
                 });
             })
     };
+
     exports.getUserRepoContent = function(req, res) {
         var user_name = req.params.user_name;
         var repository_name = req.params.repository_name;
@@ -73,7 +67,8 @@ module.exports = function(models) {
                     };
                     // console.log(details);
                     res.render('checkedFilesFeeds', {
-                        userFeed: details
+                        userFeed: details,
+                        layout : false
                     });
                 })
                 .catch((err) => next(err));

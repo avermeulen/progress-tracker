@@ -6,6 +6,7 @@ const express = require('express'),
     express_handlebars = require('express-handlebars'),
     TrackUsers = require('./routes/trackUsers'),
     Projects = require('./routes/projects'),
+    Track = require('./routes/track'),
     models = require('./models'),
     // Load the core build.
     _ = require('lodash/core');
@@ -31,36 +32,19 @@ app.use('/node_modules',  express.static(__dirname + '/node_modules'));
 
 // look at this: https://lodash.com/docs/4.16.2#find
 
-/*
-var_const.js
-variables.js
-dynamically_typed.js
-type_errors.js
-empty_variables.js
-*/
-
-app.use(function(req, res, next){
-
-    res.locals = {
-        'project' : 'function_intro',
-        'candidates' : ['Christianraymond',
-        'Sibabale',
-        'SinethembaDlova',
-        'GarethW1994',
-        'janine-code']
-    };
-
-    next();
-
-});
-
 app.get('/',function(req,res){
   res.render('home');
 })
 
 const trackUsers = TrackUsers(models);
 
-app.get('/track/:user_name/:repository_name/contents', trackUsers.specificUserFilePool);
+const track = Track(models);
+
+app.get('/track', track.select);
+app.post('/track', track.track);
+
+//app.get('/track/:user_name/:repository_name/contents', trackUsers.specificUserFilePool);
+
 app.get('/track/:user_name/repo/:repository_name/matches', trackUsers.userFileRepoCheck);
 
 const projects = Projects(models);

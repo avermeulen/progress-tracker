@@ -3,10 +3,12 @@
 const express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
+    session = require('express-session'),
     express_handlebars = require('express-handlebars'),
+    Track = require('./routes/track'),
     TrackUsers = require('./routes/trackUsers'),
     Projects = require('./routes/projects'),
-    Track = require('./routes/track'),
+    Login = require('./routes/login'),
     models = require('./models'),
     // Load the core build.
     _ = require('lodash/core');
@@ -20,13 +22,37 @@ app.engine('handlebars', express_handlebars({
 app.set('view engine', 'handlebars')
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json())
 
 app.use(express.static(__dirname + '/public'));
 app.use('/node_modules',  express.static(__dirname + '/node_modules'));
+
+app.use(session({
+    secret: 'red cats running over brig@d3s',
+    resave: false,
+    saveUninitialized: true
+}));
+
+app.use(function(req, res, next){
+
+    const unAuthPaths = {
+        '/logout' : true,
+        '/login' : true,
+        '/auth' : true,
+        '/callback' : true,
+        '/login' : true
+    };
+
+    if (!req.session.username
+            && !unAuthPaths[req.path]){
+        return res.redirect('/login');
+    }
+    next();
+});
+
 
 // list of all the files the need to create for each project
 
@@ -37,26 +63,27 @@ app.get('/',function(req,res){
 })
 
 const trackUsers = TrackUsers(models);
-
 const track = Track(models);
+const projects = Projects(models);
+const login = Login(models);
 
 app.get('/track', track.select);
-app.post('/track', track.track);
-
-//app.get('/track/:user_name/:repository_name/contents', trackUsers.specificUserFilePool);
-
 app.get('/track/:user_name/repo/:repository_name/matches', trackUsers.userFileRepoCheck);
-
-const projects = Projects(models);
+app.post('/track', track.track);
 
 app.get('/projects', projects.list);
 app.get('/projects/add', projects.showAdd);
 app.post('/projects/add', projects.add);
 app.get('/projects/edit/:project_id', projects.edit);
 app.post('/projects/update/:project_id', projects.update);
-
 app.post('/projects/:project_id/add/files', projects.addFiles);
 app.get('/projects/:project_id/files/:file_id/delete', projects.deleteFile);
+
+
+app.get('/login', login.show);
+app.get('/logout', login.logout);
+app.get('/auth', login.login);
+app.get('/callback', login.callback);
 
 function errorHandler(err, req, res, next) {
   res.status(500);

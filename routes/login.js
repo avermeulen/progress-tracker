@@ -10,7 +10,9 @@ module.exports = function() {
             rp(`${QuizMeURL}/api/users/${username}`)
                 .then((user) => {
                     user = JSON.parse(user);
-                    if (user.active && user.active === true) {
+                    if (user.active
+                            && user.active === true
+                            && user.role === 'admin') {
                         ctx.req.session.username = user.githubUsername;
                         ctx.res.redirect('/');
                     } else {

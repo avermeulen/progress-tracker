@@ -33,7 +33,7 @@ module.exports = function(models){
                         repo : project_name
                     }
                 });
-                res.render('track/track', {candidates});
+                res.render('track/track', {candidates, projectName : project_name});
             });
     }
 

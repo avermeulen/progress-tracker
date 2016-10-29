@@ -1,17 +1,24 @@
 <div class="row">
     <h1>Edit project</h1>
 
-    <form class="" action="/projects/{{_id}}/add/files" method="post">
+    <form class="" action="/projects/update/{{_id}}" method="post">
         <div class="form-group">
             <label for="projectName">Project name</label>
-            {{projectName}}
+            <input type="text" class="form-control" name="projectName" value="{{projectName}}" >
         </div>
+        <div class="form-group ">
+            <label for="projectName">Github repo name</label>
+            <input type="text" class="form-control " name="repoName" value="{{repoName}}" >
+        </div>
+        <input type="submit" name="name" value="Update" class="btn btn-warning">
+    </form>
 
+    <form class="" action="/projects/{{_id}}/add/files" method="post">
         <div class="form-group">
-            <label for="fileName">File name</label>
+            <label for="fileName">Files to add</label>
             <input type="text" class="form-control" name="fileNames" >
         </div>
-        <input type="submit" class="btn btn-success" name="addFile">
+        <input type="submit" class="btn btn-success" name="addFile" value="Add files">
     </form>
 
     <h2>Files</h2>

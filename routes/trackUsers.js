@@ -49,7 +49,7 @@ module.exports = function(models) {
             var files = detailedUserContent.file_List;
 
             models.Project
-                .findOne({projectName : repository_name})
+                .findOne({repoName : repository_name})
                 .then(function(project){
                     const expectedFiles = project.files.map(file => file.name);
 
@@ -65,7 +65,6 @@ module.exports = function(models) {
                         repo: repository_name,
                         files: fileList
                     };
-                    // console.log(details);
                     res.render('checkedFilesFeeds', {
                         userFeed: details,
                         layout : false

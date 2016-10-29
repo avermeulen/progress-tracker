@@ -3,8 +3,13 @@ module.exports = function(models){
     var add = function(req, res, next){
 
         const projectName = req.body.projectName;
-        if (projectName){
-            const project = models.Project({projectName});
+        const repoName = req.body.repoName;
+
+        if (projectName && repoName){
+            const project = models.Project({
+                projectName,
+                repoName
+            });
             return project
                 .save()
                 .then(() => {
@@ -28,15 +33,26 @@ module.exports = function(models){
 
     var edit = function(req, res){
         const project_id = req.params.project_id;
-
         models.Project
             .findById(project_id)
             .then((project) => {
                 res.render('projects/edit', project);
-            })
+            });
+    };
 
+    var update = function(req, res){
+        const project_id = req.params.project_id;
+        const projectName = req.body.projectName;
+        const repoName = req.body.repoName;
+        models.Project
+            .update({_id : project_id},
+                { $set : {projectName, repoName}})
+            .then((project) => {
+                //res.render('projects/edit', project);
+                res.redirect(`/projects/edit/${project_id}`)
+            });
+    };
 
-    }
 
     var addFiles = function(req, res){
         const project_id = req.params.project_id
@@ -80,6 +96,7 @@ module.exports = function(models){
     return {
         add,
         deleteFile,
+        update,
         edit,
         list,
         showAdd,

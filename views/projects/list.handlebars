@@ -4,13 +4,28 @@
     <a href="/projects/add" class="btn btn-success">Add project</a>
 
     <table class="table">
+        <tr>
+            <th>
+                Project name
+            </th>
+            <th>
+                Repo name
+            </th>
+            <th>
+                Actions
+            </th>
+
+        </tr>
         {{#projects}}
             <tr>
                 <td>
                     {{projectName}}
                 </td>
                 <td>
-                    <a class="btn" href="/projects/edit/{{_id}}">Edit</a>
+                    {{repoName}}
+                </td>
+                <td>
+                    <a class="btn btn-warning" href="/projects/edit/{{_id}}">Edit</a>
                 </td>
             </tr>
         {{/projects}}

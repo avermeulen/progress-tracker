@@ -53,6 +53,7 @@ app.get('/projects', projects.list);
 app.get('/projects/add', projects.showAdd);
 app.post('/projects/add', projects.add);
 app.get('/projects/edit/:project_id', projects.edit);
+app.post('/projects/update/:project_id', projects.update);
 
 app.post('/projects/:project_id/add/files', projects.addFiles);
 app.get('/projects/:project_id/files/:file_id/delete', projects.deleteFile);

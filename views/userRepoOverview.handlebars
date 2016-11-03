@@ -1,0 +1,43 @@
+{{#user}}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="icon-github"></i> Username: {{username}}</h3>
+        </div>
+        <div class="panel-body"><i class="icon-github"></i> Repository : {{repo}}
+        </div>
+    </div>
+
+    <div class="bs-example">
+
+        <table id="req-files-check" class="table table-bordered">
+            <colgroup>
+                <col class="col-xs-4">
+                <col class="col-xs-4"> </colgroup>
+            <thead>
+                <tr class="bg-success">
+                    <th><i class="icon-github"></i> Required Files</th>
+                    <th>Exists ?</th>
+                </tr>
+            </thead>
+            {{#each files}}
+                <tbody>
+                    <tr>
+                        <td>
+                            {{#if exist}}
+                            <a href="https://github.com/{{../username}}/{{../repo}}/blob/master/{{file_name}}" target="_blank">{{file_name}}</a>
+                            {{else}}
+                            {{file_name}}
+                            {{/if}}
+                        </td>
+                        <td>
+                            <!-- <p hidden="hidden">{{exist}}</p> -->
+                            {{#if exist}}
+                                <i><span class="glyphicon glyphicon-ok icon-2x" aria-hidden="true"></span>
+                                {{else}}
+                                <i class="icon-remove icon-2x" ></i>
+                            {{/if}}
+                        </td>
+                    </tr>
+                </tbody>
+            {{/each}}
+{{/user}}

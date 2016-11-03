@@ -2,12 +2,12 @@ const github = require('octonode'),
     // Load the full build.
     _ = require('lodash'),
     // Load git user content
-    client = github.client();
+    ghClient = github.client();
 
 module.exports = function(models) {
 
-    const specificUserFilePool = function(user_name, repository_name, cb) {
-        client
+    const filesInGithubRepoForUser = function(user_name, repository_name, cb) {
+        ghClient
             .get('/repos/' + user_name + '/' + repository_name + '/contents', function(err, results, data) {
 
                 const fileNames = data ? data.map((entry) =>
@@ -15,10 +15,10 @@ module.exports = function(models) {
 
                 // gather user specifics but without the get user module(Plugin)
                 const detailedUserContentObj = {
-                    user_name: user_name,
-                    repository_name: repository_name,
-                    file_List: fileNames,
-                    fileNo: fileNames.length
+                    user_name : user_name,
+                    repository_name : repository_name,
+                    files : fileNames,
+                    fileCount : fileNames.length
                 };
 
                 //make sure it's a true async call
@@ -28,25 +28,26 @@ module.exports = function(models) {
             })
     };
 
-    exports.getUserRepoContent = function(req, res) {
-        var user_name = req.params.user_name;
-        var repository_name = req.params.repository_name;
-
-        specificUserFilePool(user_name, repository_name, function(err, detailedUserContent) {
-            var files = detailedUserContent.file_List;
-
-            res.render('usersDataPresentation', {
-                filesNameResult: detailedUserContent
-            })
-        });
-    };
+    // exports.getUserRepoContent = function(req, res) {
+    //     var user_name = req.params.user_name;
+    //     var repository_name = req.params.repository_name;
+    //
+    //     filesInGithubRepoForUser(user_name, repository_name, function(err, detailedUserContent) {
+    //         var files = detailedUserContent.files;
+    //
+    //         res.render('usersDataPresentation', {
+    //             filesNameResult: detailedUserContent
+    //         })
+    //     });
+    // };
 
     const userFileRepoCheck = function(req, res, next) {
         var user_name = req.params.user_name;
         var repository_name = req.params.repository_name;
 
-        specificUserFilePool(user_name, repository_name, function(err, detailedUserContent) {
-            var files = detailedUserContent.file_List;
+        filesInGithubRepoForUser(user_name, repository_name, function(err, detailedUserContent) {
+
+            var files = detailedUserContent.files;
 
             models.Project
                 .findOne({repoName : repository_name})
@@ -65,18 +66,19 @@ module.exports = function(models) {
                         repo: repository_name,
                         files: fileList
                     };
-                    res.render('checkedFilesFeeds', {
-                        userFeed: details,
+
+                    res.render('userRepoOverview', {
+                        user : details,
                         layout : false
                     });
+
                 })
                 .catch((err) => next(err));
         });
     };
 
     return {
-        userFileRepoCheck,
-        specificUserFilePool
+        userFileRepoCheck
     };
 
 }

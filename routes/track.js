@@ -21,20 +21,38 @@ module.exports = function(models){
     const track = function(req, res, next){
         const group_id = req.body.group_id;
         const project_name = req.body.project_name;
-        const membersURL = `${QuizMeURL}/api/usergroups/${group_id}/members`;
-        rp(membersURL)
-            .then((members) => {
 
-                members = JSON.parse(members);
-                const candidates = members.map((member) => {
-                    return {
-                        fullName : member.firstName + " " + member.lastName,
-                        username : member.githubUsername,
-                        repo : project_name
+        models.Project
+            .find({})
+            .then((projects) => {
+
+                projects.forEach((p) =>{
+                    if (p.repoName === project_name){
+                        p.selected = "selected";
                     }
                 });
-                res.render('track/track', {candidates, projectName : project_name});
+
+                //
+                const membersURL = `${QuizMeURL}/api/usergroups/${group_id}/members`;
+                rp(membersURL)
+                .then((members) => {
+
+                    members = JSON.parse(members);
+                    const candidates = members.map((member) => {
+                        return {
+                            fullName : member.firstName + " " + member.lastName,
+                            username : member.githubUsername,
+                            repo : project_name
+                        }
+                    });
+                    res.render('track/track', {
+                        candidates,
+                        projectName : project_name,
+                        projects
+                    });
+                });
             });
+
     }
 
     return {

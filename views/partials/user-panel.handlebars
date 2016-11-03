@@ -4,6 +4,8 @@
   </a>
   {{#candidates}}
     <a class="list-group-item candidate"
+        data-username="{{username}}"
+        data-repoName="{{repo}}"
         href="/track/{{username}}/repo/{{repo}}/matches">
             <i class="icon-user"></i> {{fullName}} </a>
   {{/candidates}}
@@ -17,7 +19,17 @@
         var candidate = candidates[i];
         candidate.addEventListener('click', function(e){
             e.preventDefault();
-            jQuery.get(e.target.href, function(result){
+            var repo = document.querySelector('.repoName');
+
+            var username = e.target.getAttribute('data-username');
+            var repoName = repo.value;
+
+            var url  = '/track/' + username + '/repo/' + repoName + '/matches';
+
+            //var url = repoName.value ? : '';
+            //console.log(url);
+
+            jQuery.get(url, function(result){
                 //console.log(result);
                 document.querySelector('.candidate-file-details').innerHTML = result;
             });

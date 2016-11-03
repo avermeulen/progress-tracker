@@ -8,7 +8,11 @@
                     <h3 class="panel-title">Project</h3>
             </div>
             <div class="panel-body">
-                {{projectName}}
+                <select class="repoName" name="repoName">
+                    {{#projects}}
+                    <option value="{{repoName}}" {{selected}}>{{projectName}}
+                    {{/projects}}
+                </select>
             </div>
         </div>
 

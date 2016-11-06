@@ -7,13 +7,27 @@
             <div class="panel-heading">
                     <h3 class="panel-title">Project</h3>
             </div>
-            <div class="panel-body">
-                <select class="repoName" name="repoName">
-                    {{#projects}}
-                    <option value="{{repoName}}" {{selected}}>{{projectName}}
-                    {{/projects}}
-                </select>
-            </div>
+            <form class="" action="/track" method="post">
+                <div class="panel-body">
+                        <strong>Project:</strong>
+                        <select class="form-control repoName" name="repoName">
+                            {{#projects}}
+                            <option value="{{repoName}}" {{selected}}>{{projectName}}
+                            {{/projects}}
+                        </select>
+                        <br>
+                    <strong>User group:</strong>
+                    <select class="form-control" name="groupId">
+                        {{#userGroups}}
+                            <option value="{{_id}}" {{selected}}>{{name}}</option>
+                        {{/userGroups}}
+                    </select>
+                </div>
+                <div class="panel-body">
+                    <input class="btn btn" type="submit" name="groupMembers" value="Get members">
+                </div>
+            </form>
+
         </div>
 
         {{>user-panel}}

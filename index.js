@@ -59,7 +59,7 @@ app.use(function(req, res, next){
 // look at this: https://lodash.com/docs/4.16.2#find
 
 app.get('/',function(req,res){
-  res.render('home');
+  res.redirect('/track');
 })
 
 const trackUsers = TrackUsers(models);
@@ -67,7 +67,7 @@ const track = Track(models);
 const projects = Projects(models);
 const login = Login(models);
 
-app.get('/track', track.select);
+app.get('/track', track.track);
 app.get('/track/:user_name/repo/:repository_name/matches', trackUsers.userFileRepoCheck);
 app.post('/track', track.track);
 
